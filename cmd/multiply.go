@@ -14,13 +14,16 @@ var (
 		Short:   "Multiply 2 numbers.",
 		Long:    "Carry out multiplication operation on two numbers.",
 		Args:    cobra.ExactArgs(2),
-		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Printf(
-				"Multiplication of %s and %s = %s.\n\n",
-				args[0],
-				args[1],
-				Multiply(args[0], args[1], shouldRoundUp),
-			)
+		RunE: func(cmd *cobra.Command, args []string) error {
+			err, res := Multiply(args[0], args[1], shouldRoundUp)
+
+			if err != nil {
+				return err
+			}
+
+			fmt.Printf("Multiplication of %s and %s = %s.\n\n", args[0], args[1], res)
+
+			return nil
 		},
 	}
 )
