@@ -56,3 +56,21 @@ func Multiply(first, second string, shouldRoundUp bool) (result string) {
 
 	return fmt.Sprintf("%f", num1*num2)
 }
+
+func Divide(divide, by string, shouldRoundUp bool) (e error, result string) {
+	num1, err := strconv.ParseFloat(divide, 64)
+	if err != nil {
+		return fmt.Errorf("first value is not a number"), ""
+	}
+
+	num2, err := strconv.ParseFloat(by, 64)
+	if err != nil {
+		return fmt.Errorf("second value is not a number"), ""
+	}
+
+	if shouldRoundUp {
+		return nil, fmt.Sprintf("%.2f", num1/num2)
+	}
+
+	return nil, fmt.Sprintf("%f", num1/num2)
+}
